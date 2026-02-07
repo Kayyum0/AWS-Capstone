@@ -54,10 +54,10 @@ class DynamoDBRepository(BaseRepository):
         self.appointments_table.put_item(Item=appointment_data)
         return appointment_data
 
-    def get_appointments_by_doctor(self, doctor_name):
+    def get_appointments_by_doctor_id(self, doctor_id):
         try:
             response = self.appointments_table.scan(
-                FilterExpression=Attr('doctor').eq(doctor_name)
+                FilterExpression=Attr('doctor_id').eq(doctor_id)
             )
             return response.get('Items', [])
         except Exception as e:
@@ -88,4 +88,14 @@ class DynamoDBRepository(BaseRepository):
             return response.get('Items', [])
         except Exception as e:
             print(f"Error fetching patients: {e}")
+            return []
+
+    def get_all_doctors(self):
+        try:
+            response = self.users_table.scan(
+                FilterExpression=Attr('role').eq('doctor')
+            )
+            return response.get('Items', [])
+        except Exception as e:
+            print(f"Error fetching doctors: {e}")
             return []

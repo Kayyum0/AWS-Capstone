@@ -26,12 +26,12 @@ const DoctorDashboard = () => {
         }
         const parsedUser = JSON.parse(storedUser);
         setUser(parsedUser);
-        fetchData(parsedUser.full_name);
+        fetchData(parsedUser.id);
     }, [navigate]);
 
-    const fetchData = async (doctorName) => {
+    const fetchData = async (doctorId) => {
         try {
-            const apts = await api.getDoctorAppointments(doctorName);
+            const apts = await api.getDoctorAppointments(doctorId);
             setAppointments(apts);
 
             const allPatients = await api.getAllPatients();

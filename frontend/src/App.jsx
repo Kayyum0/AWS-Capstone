@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import BookAppointment from './pages/BookAppointment';
 
 import DoctorLogin from './pages/DoctorLogin';
+import DoctorRegister from './pages/DoctorRegister';
 import DoctorDashboard from './pages/DoctorDashboard';
 import PatientHistory from './pages/PatientHistory';
 
@@ -25,6 +26,7 @@ function App() {
 
           {/* Doctor Portal Routes */}
           <Route path="doctor/login" element={<DoctorLogin />} />
+          <Route path="doctor/register" element={<DoctorRegister />} />
           <Route path="doctor/dashboard" element={<DoctorDashboard />} />
         </Route>
       </Routes>

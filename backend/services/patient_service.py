@@ -12,4 +12,7 @@ class PatientService:
     def get_all_patients(self):
         return db.get_all_patients(), 200
 
+    def get_all_doctors(self):
+        return db.get_all_doctors(), 200
+
 patient_service = PatientService()

@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 export const api = {
     // Auth
@@ -36,8 +36,8 @@ export const api = {
     },
 
     // Doctor
-    async getDoctorAppointments(doctorName) {
-        const response = await fetch(`${API_URL}/appointments/?doctor=${doctorName}`);
+    async getDoctorAppointments(doctorId) {
+        const response = await fetch(`${API_URL}/appointments/?doctorId=${doctorId}`);
         return response.json();
     },
 
@@ -58,6 +58,11 @@ export const api = {
 
     async getAllPatients() {
         const response = await fetch(`${API_URL}/patients/`);
+        return response.json();
+    },
+
+    async getDoctors() {
+        const response = await fetch(`${API_URL}/patients/doctors`);
         return response.json();
     }
 };

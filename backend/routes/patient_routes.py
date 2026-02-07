@@ -18,3 +18,8 @@ def add_medical_record(patient_id):
 def get_all_patients():
     response, status = patient_service.get_all_patients()
     return jsonify(response), status
+
+@patient_bp.route('/doctors', methods=['GET'])
+def get_all_doctors():
+    response, status = patient_service.get_all_doctors()
+    return jsonify(response), status

@@ -42,8 +42,8 @@ const LandingPage = () => {
                             Find a Doctor
                             <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                         </Link>
-                        <Link to="/about" className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-full font-bold text-lg hover:bg-slate-50 transition-colors">
-                            Learn More
+                        <Link to="/doctor/register" className="w-full sm:w-auto px-8 py-4 bg-white text-indigo-600 border border-indigo-200 rounded-full font-bold text-lg hover:bg-indigo-50 transition-colors shadow-sm">
+                            Join as a Doctor
                         </Link>
                     </div>
 

@@ -11,11 +11,29 @@ const BookAppointment = () => {
     const [selectedTime, setSelectedTime] = useState('');
 
     // Mock data
-    const doctors = [
-        { id: 1, name: 'Dr. Sarah Wilson', specialty: 'Cardiology', availability: 'Mon-Fri' },
-        { id: 2, name: 'Dr. Michael Chen', specialty: 'Dermatology', availability: 'Tue-Sat' },
-        { id: 3, name: 'Dr. Emily Brooks', specialty: 'General Medicine', availability: 'Mon-Thu' },
-    ];
+    // Mock data replaced with real data fetch
+    const [doctors, setDoctors] = useState([]);
+
+    React.useEffect(() => {
+        const fetchDoctors = async () => {
+            try {
+                const data = await api.getDoctors();
+                // Map backend user fields to frontend expectation if needed, or just use as is
+                // Backend returns: { full_name, role, specialization, ... }
+                // Frontend expects: { id, name, specialty, availability }
+                const mappedDoctors = data.map(d => ({
+                    id: d.id,
+                    name: d.full_name, // Backend uses full_name
+                    specialty: d.specialization || 'General',
+                    availability: 'Mon-Fri' // Hardcoded for now as backend doesn't have it
+                }));
+                setDoctors(mappedDoctors);
+            } catch (error) {
+                console.error("Failed to fetch doctors", error);
+            }
+        };
+        fetchDoctors();
+    }, []);
 
     const timeSlots = ['09:00 AM', '10:00 AM', '11:00 AM', '02:00 PM', '03:00 PM', '04:00 PM'];
 
@@ -23,7 +41,8 @@ const BookAppointment = () => {
         try {
             const appointmentData = {
                 patientId: "test-patient-id", // Mock ID, real app would get from context
-                doctor: selectedDoctor.name,
+                doctorId: selectedDoctor.id,
+                doctorName: selectedDoctor.name,
                 specialty: selectedDoctor.specialty,
                 date: selectedDate,
                 time: selectedTime

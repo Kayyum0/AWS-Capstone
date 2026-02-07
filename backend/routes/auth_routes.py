@@ -7,9 +7,11 @@ auth_bp = Blueprint('auth', __name__)
 def register():
     data = request.json
     response, status = auth_service.register(
-        data.get('email'), 
-        data.get('password'), 
-        data.get('fullName')
+        email=data.get('email'), 
+        password=data.get('password'), 
+        full_name=data.get('fullName'),
+        role=data.get('role', 'patient'),
+        specialization=data.get('specialization')
     )
     return jsonify(response), status
 

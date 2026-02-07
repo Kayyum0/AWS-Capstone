@@ -50,8 +50,8 @@ class MockRepository(BaseRepository):
         self.appointments.append(appointment_data)
         return appointment_data
 
-    def get_appointments_by_doctor(self, doctor_name):
-        return [apt for apt in self.appointments if apt.get('doctor') == doctor_name]
+    def get_appointments_by_doctor_id(self, doctor_id):
+        return [apt for apt in self.appointments if apt.get('doctor_id') == doctor_id]
 
     def get_medical_records(self, patient_id):
         return [rec for rec in self.medical_records if rec['patient_id'] == patient_id]
@@ -64,6 +64,9 @@ class MockRepository(BaseRepository):
 
     def get_all_patients(self):
         return [u for u in self.users if u.get('role') == 'patient']
+
+    def get_all_doctors(self):
+        return [u for u in self.users if u.get('role') == 'doctor']
 
 # Singleton instance
 if os.environ.get('USE_AWS') == 'True':

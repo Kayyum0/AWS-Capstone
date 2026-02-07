@@ -1,16 +1,21 @@
 from repository.mock_db import db
 
 class AuthService:
-    def register(self, email, password, full_name, role='patient'):
+    def register(self, email, password, full_name, role='patient', specialization=None):
         if db.get_user_by_email(email):
             return {"error": "User already exists"}, 400
         
-        user = db.create_user({
+        user_data = {
             "email": email,
             "password": password, # In real app, hash this!
             "full_name": full_name,
             "role": role
-        })
+        }
+        
+        if role == 'doctor' and specialization:
+            user_data['specialization'] = specialization
+
+        user = db.create_user(user_data)
         return {"message": "User registered successfully", "user_id": user['id']}, 201
 
     def login(self, email, password):
