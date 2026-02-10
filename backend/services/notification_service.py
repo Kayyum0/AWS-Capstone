@@ -4,7 +4,7 @@ import os
 class NotificationService:
     def __init__(self):
         self.sns = None
-        self.topic_arn = os.environ.get('AWS_SNS_TOPIC_ARN')
+        self.topic_arn = os.environ.get('AWS_SNS_TOPIC_ARN', 'arn:aws:sns:us-east-1:841162686181:aws_capstone')
         self.region = os.environ.get('AWS_DEFAULT_REGION', 'us-east-1')
         
         if os.environ.get('USE_AWS') == 'True':
